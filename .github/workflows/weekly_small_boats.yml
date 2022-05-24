@@ -3,7 +3,7 @@ name: Fetch weekly UK small boat data
 on:
   repository_dispatch:
   schedule:
-    - cron:  '0 12 * * 2'
+    - cron:  '10 12 * * 2'
 
 jobs:
   scheduled:
