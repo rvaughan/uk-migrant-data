@@ -1,5 +1,10 @@
 # UK Government Immigration and Migrant Data
 
+[![Fetch daily UK small boat data](https://github.com/rvaughan/uk-migrant-data/actions/workflows/daily_small_boats.yml/badge.svg)](https://github.com/rvaughan/uk-migrant-data/actions/workflows/daily_small_boats.yml)
+[![Process daily small boats data](https://github.com/rvaughan/uk-migrant-data/actions/workflows/process_dsb.yml/badge.svg)](https://github.com/rvaughan/uk-migrant-data/actions/workflows/process_dsb.yml)
+[![Fetch weekly UK small boat data](https://github.com/rvaughan/uk-migrant-data/actions/workflows/weekly_small_boats.yml/badge.svg)](https://github.com/rvaughan/uk-migrant-data/actions/workflows/weekly_small_boats.yml)
+[![Process weekly small boats data](https://github.com/rvaughan/uk-migrant-data/actions/workflows/process_wsb.yml/badge.svg)](https://github.com/rvaughan/uk-migrant-data/actions/workflows/process_wsb.yml)
+
 This project tracks UK Government immigration and migrant data sets, providing a simple overview
 of the results that is hopefully easy to understand.
 
