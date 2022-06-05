@@ -11,4 +11,5 @@ of the results that is hopefully easy to understand.
   * [ONS: Labour Market (AP2Y)](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/timeseries/ap2y/unem)
   * [ONS: Labour Market (MGWG)](https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/timeseries/mgwg/lms)
   * [ONS: Population Statistics](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/timeseries/ukpop/pop)
+      * [ONS: Annual Midyear Statistics (mid2020)](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/bulletins/annualmidyearpopulationestimates/mid2020)
   * [Weekly small boat crossing data](https://www.gov.uk/government/statistics/migrants-detected-crossing-the-english-channel-in-small-boats-weekly-data).
