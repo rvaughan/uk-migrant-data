@@ -13,7 +13,7 @@ jobs:
       id: date
       run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
     - name: Check out this repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Fetch the data
       run: |-
         curl -s --compressed -o data/weekly_small_boats/${{ steps.date.outputs.date }}.html "https://www.gov.uk/government/statistics/migrants-detected-crossing-the-english-channel-in-small-boats-weekly-data"
