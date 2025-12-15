@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Fetch the data
       run: |-
-        curl -s --compressed -o data/weekly_small_boats/${{ steps.date.outputs.date }}.html "https://www.gov.uk/government/statistics/migrants-detected-crossing-the-english-channel-in-small-boats-weekly-data"
+        curl -s --compressed -o data/weekly_small_boats/${{ steps.date.outputs.date }}.html "https://www.gov.uk/government/publications/migrants-detected-crossing-the-english-channel-in-small-boats/weekly-summary-of-small-boat-arrivals-and-preventions"
     - name: Commit and push data if it changed
       run: |-
         git config user.name "Automated"

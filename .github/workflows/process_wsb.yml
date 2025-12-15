@@ -30,7 +30,7 @@ jobs:
         pip install -r scripts/requirements.txt
     - name: Process the data
       run: |-
-        python scripts/process_wsb.py ${{ steps.date.outputs.date }} data/weekly_small_boats/${{ steps.date.outputs.date }}.html data/weekly_small_boats
+        python scripts/process_wsb.py data/weekly_small_boats/${{ steps.date.outputs.date }}.html data/weekly_small_boats/data.csv
     - name: Commit and push the data if it changed
       run: |-
         git config user.name "Automated"
