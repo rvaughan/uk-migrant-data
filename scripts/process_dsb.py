@@ -10,6 +10,10 @@ The page contains a table with columns:
 - Boats arrived
 - Boats involved in uncontrolled landings
 - Notes
+
+This script reads the "last 7 days" HTML page and updates the CSV file.
+It will add new entries and update existing entries if the new data has
+higher values (the live data is more current than the ODS time series).
 """
 import csv
 import os
@@ -26,23 +30,25 @@ if len(sys.argv) < 3:
 input_file = sys.argv[1]
 output_file = sys.argv[2]
 
-# Read existing dates from CSV to avoid duplicates
-existing_dates = set()
+# Read existing data from CSV
+existing_data = {}
 if os.path.exists(output_file):
     with open(output_file, 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             if row and not row[0].startswith('#'):
-                existing_dates.add(row[0].strip('"'))
+                date_str = row[0].strip('"')
+                migrants = int(row[1])
+                boats = int(row[2])
+                existing_data[date_str] = (migrants, boats)
 
 # Parse the HTML file
+updates = []
 with open(input_file, 'r') as f:
     html = BeautifulSoup(f, features="html.parser")
 
     # Find the data table - look for tables with date/migrants/boats structure
     tables = html.find_all('table')
-
-    new_entries = []
 
     for table in tables:
         rows = table.find_all('tr')
@@ -66,18 +72,28 @@ with open(input_file, 'r') as f:
                     migrants = int(migrants) if migrants.isdigit() else 0
                     boats = int(boats) if boats.isdigit() else 0
 
-                    if date_str not in existing_dates:
-                        new_entries.append((date_str, migrants, boats))
-                        existing_dates.add(date_str)
+                    # Check if this is new or an update
+                    if date_str not in existing_data:
+                        existing_data[date_str] = (migrants, boats)
+                        updates.append(f'Added {date_str}: {migrants} migrants, {boats} boats')
+                    elif existing_data[date_str] != (migrants, boats):
+                        old_migrants, old_boats = existing_data[date_str]
+                        existing_data[date_str] = (migrants, boats)
+                        updates.append(f'Updated {date_str}: {old_migrants}->{migrants} migrants, {old_boats}->{boats} boats')
                 except (ValueError, AttributeError) as e:
                     # Skip rows that don't match expected format
                     continue
 
-# Append new entries to CSV
-if new_entries:
-    with open(output_file, 'a') as f:
-        for date_str, migrants, boats in new_entries:
-            f.write(f'"{date_str}",{migrants},{boats}\n')
-    print(f'Added {len(new_entries)} new entries')
+# Write all data back to CSV (sorted by date)
+with open(output_file, 'w') as f:
+    f.write('#date,migrants,boats\n')
+    for date_str in sorted(existing_data.keys()):
+        migrants, boats = existing_data[date_str]
+        f.write(f'"{date_str}",{migrants},{boats}\n')
+
+if updates:
+    for update in updates:
+        print(update)
+    print(f'Total: {len(updates)} changes')
 else:
-    print('No new entries to add')
+    print('No changes needed')
